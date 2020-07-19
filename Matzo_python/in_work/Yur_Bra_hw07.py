@@ -28,9 +28,29 @@ def get_season(number):
 
 
 # 2nd task
+from collections import Counter
+
+
 def converter(string, separator):
     count_list = []
-    return string, separator
+    for word in string.split(separator):
+        clear_list = ''
+        for letter in word:
+            if type(letter) == str:
+                clear_list += letter.lower()
+
+        count_list.append(clear_list)
+    return print(Counter(count_list))
+
+
+# ────────── * TESTING * ──────────
+
+# my_str = input('String\n>')
+# delimiter = input('delimiter\n>')
+#
+# converter(my_str, delimiter)
+
+# ─────────────────────────────────
 
 # 3d task
 def get_rectangle_data(side):
