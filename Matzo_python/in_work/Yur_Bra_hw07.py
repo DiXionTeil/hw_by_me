@@ -137,7 +137,7 @@ def converter_6(string, separator):
 # ────────── * TESTING * ──────────
 
 # my_str = input('String\n>')  # 'football, foot, summer, sum, ball, football'
-# delimiter = input('delimiter\n>')  # ',' without SPACE
+# delimiter = input('delimiter\n>')# ',' without SPACE
 #
 # print(converter_6(my_str, delimiter))
 
