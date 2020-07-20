@@ -122,6 +122,29 @@ def converter_5(string, separator):
 # ─────────────────────────────────
 
 
+# 2nd task, 6th METHOD:
+def converter_6(string, separator):
+    res = {}
+    temp_list = [string.strip() for string in string.split(separator)]
+    for word in temp_list:
+        if word not in res.keys():
+            res[word] = 1
+        else:
+            res[word] += 1
+    return res
+
+
+# ────────── * TESTING * ──────────
+
+# my_str = input('String\n>')  # 'football, foot, summer, sum, ball, football'
+# delimiter = input('delimiter\n>')  # ',' without SPACE
+#
+# print(converter_6(my_str, delimiter))
+
+
+# ─────────────────────────────────
+
+
 # 3d task
 def get_rectangle_data(side):
     if not isinstance(side, (int, float)):
