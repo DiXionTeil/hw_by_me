@@ -27,6 +27,7 @@ def read_this(file):
 #     read_this(file_to_write)
 
 
+
 # 2d task:
 import json
 
@@ -42,54 +43,66 @@ import json
 
 # 3d task:
 import random
-INPUT_NUMBER = None
-SHOTS = 10
-FIRST_VALUE_SHOTS = SHOTS
-RANDOM_NUM1 = 1
-RANDOM_NUM2 = 50
+input_number = None
+shots = 10
+first_value_shots = shots
+random_num1 = 1
+random_num2 = 50
 
 
-def print_shot_of_shots(SHOTS):
-    return f'You have {SHOTS}/{FIRST_VALUE_SHOTS} attempts'
+def print_shot_of_shots(shots):
+    return f'You have {shots}/{first_value_shots} attempts'
 
 
-def input_number():
-    INPUT_NUMBER = input('>')
-    while not INPUT_NUMBER.isdigit():
-        INPUT_NUMBER = input('Not correct number\nPlease try again!\n>')
-    INPUT_NUMBER = int(INPUT_NUMBER)
-    return INPUT_NUMBER
+def input_numbers():
+    input_number = input('>')
+    while not input_number.isdigit():
+        input_number = input('Not correct number\nPlease try again!\n>')
+    input_number = int(input_number)
+    return input_number
 
 
-def corr_num_range(RANDOM_NUM1, RANDOM_NUM2):
-    INPUT_NUMBER = input_number()
-    while not RANDOM_NUM1 - 1 < INPUT_NUMBER < RANDOM_NUM2 + 1:
-        print(f'Not correct number\nIt must to be from {RANDOM_NUM1} to {RANDOM_NUM2}')
-        INPUT_NUMBER = input_number()
-    return INPUT_NUMBER
+def corr_num_range(random_num1, random_num2):
+    input_number = input_numbers()
+    while not random_num1 - 1 < input_number < random_num2 + 1:
+        print(f'Not correct number\nIt must to be from {random_num1} to {random_num2}')
+        input_number = input_number()
+    return input_number
 
 
-def game(SHOTS):
-    while SHOTS > RANDOM_NUM1 - 1:
-        INPUT_NUMBER = corr_num_range(RANDOM_NUM1, RANDOM_NUM2)
-        print(INPUT_NUMBER)
-        if INPUT_NUMBER != target_number:
-            SHOTS -= 1
-            print(print_shot_of_shots(SHOTS))
-        elif INPUT_NUMBER == target_number:
-            print(print_shot_of_shots(SHOTS))
+def game(shots):
+    while shots > random_num1 - 1:
+        input_number = corr_num_range(random_num1, random_num2)
+        if input_number != target_number:
+            shots -= 1
+            print(print_shot_of_shots(shots))
+        elif input_number == target_number:
+            print(print_shot_of_shots(shots))
             print('\nYes! You win. My congratulations.')
-            exit(0)
+            global NUMBER1_FOR_STATISTICS, NUMBER2_FOR_STATISTICS
+            NUMBER1_FOR_STATISTICS = input_number
+            NUMBER2_FOR_STATISTICS = first_value_shots - shots + 1
+            return
     else:
         print('\nNo more attempts')
-        exit(0)
     return
 
-target_number = random.randint(RANDOM_NUM1, RANDOM_NUM2)
-print(f'Let\'s play in game with random number\n'
-      + print_shot_of_shots(SHOTS)
-      + f'\nTry to guess the number from {RANDOM_NUM1} to {RANDOM_NUM2}')
-game(SHOTS)
 
+target_number = random.randint(random_num1, random_num2)
+print(f'Let\'s play in game with random number\n'
+      + print_shot_of_shots(shots)
+      + f'\nTry to guess the number from {random_num1} to {random_num2}')
+game(shots)
 
 # 4th task:
+import json
+from datetime import datetime
+
+GOOD_GAME = {
+    'The random number': NUMBER1_FOR_STATISTICS,
+    'Number of attempt': NUMBER2_FOR_STATISTICS,
+    'Date': str(datetime.now())
+}
+
+with open('random_number_game.json', 'w') as json_file:
+    json.dump(GOOD_GAME, json_file, indent=4)
