@@ -85,6 +85,7 @@ def game(shots):
             return
     else:
         print('\nNo more attempts')
+        exit(0)
     return
 
 
