@@ -89,34 +89,4 @@ else:
     exit(0)
 
 
-
-
-
-
-
-#
-# while SHOTS > 0:
-#     if corr_num_range(INPUT_NUMBER, RANDOM_NUM1, RANDOM_NUM2) != target_number:
-#         SHOTS -= 1
-#         print(print_shot_of_shots() + 'Try again:\n')
-#         input_number()
-#     else:
-#         SHOTS = 0
-#         print('No more attempts')
-#         exit(0)
-
-
-
-# while RANDOM_NUM1 - 1 < input_num < RANDOM_NUM2 + 1:
-#     while SHOTS > 0:
-#         if input_num != target_number:
-#             SHOTS -= 1
-#             print(print_shot_of_shots)
-#         else:
-#             print('Yes! You win. My congratulations.')
-#     else:
-#         print('No more attempts')
-#         exit(0)
-# else:
-#     input_num = input(f'Not correct number\nIt must to be from {RANDOM_NUM1} to {RANDOM_NUM2}\n>')
-
+# no
