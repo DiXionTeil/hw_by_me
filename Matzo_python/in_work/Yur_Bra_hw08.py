@@ -53,13 +53,6 @@ def print_shot_of_shots(SHOTS):
     return f'You have {SHOTS}/{FIRST_VALUE_SHOTS} attempts'
 
 
-target_number = random.randint(RANDOM_NUM1, RANDOM_NUM2)
-print(target_number)
-print(f'Let\'s play in game with random number\n'
-      + print_shot_of_shots(SHOTS)
-      + f'\nTry to guess the number from {RANDOM_NUM1} to {RANDOM_NUM2}')
-
-
 def input_number():
     INPUT_NUMBER = input('>')
     while not INPUT_NUMBER.isdigit():
@@ -72,6 +65,7 @@ def corr_num_range(RANDOM_NUM1, RANDOM_NUM2):
     INPUT_NUMBER = input_number()
     while not RANDOM_NUM1 - 1 < INPUT_NUMBER < RANDOM_NUM2 + 1:
         print(f'Not correct number\nIt must to be from {RANDOM_NUM1} to {RANDOM_NUM2}')
+        INPUT_NUMBER = input_number()
     return INPUT_NUMBER
 
 
@@ -91,5 +85,11 @@ def game(SHOTS):
         exit(0)
     return
 
-
+target_number = random.randint(RANDOM_NUM1, RANDOM_NUM2)
+print(f'Let\'s play in game with random number\n'
+      + print_shot_of_shots(SHOTS)
+      + f'\nTry to guess the number from {RANDOM_NUM1} to {RANDOM_NUM2}')
 game(SHOTS)
+
+
+# 4th task:
