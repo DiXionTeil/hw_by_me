@@ -64,29 +64,32 @@ def input_number():
     INPUT_NUMBER = input('>')
     while not INPUT_NUMBER.isdigit():
         INPUT_NUMBER = input('Not correct number\nPlease try again!\n>')
-    else:
-        INPUT_NUMBER = int(INPUT_NUMBER)
+    INPUT_NUMBER = int(INPUT_NUMBER)
     return INPUT_NUMBER
 
 
 def corr_num_range(RANDOM_NUM1, RANDOM_NUM2):
-    while not RANDOM_NUM1 - 1 < input_number() < RANDOM_NUM2 + 1:
+    INPUT_NUMBER = input_number()
+    while not RANDOM_NUM1 - 1 < INPUT_NUMBER < RANDOM_NUM2 + 1:
         print(f'Not correct number\nIt must to be from {RANDOM_NUM1} to {RANDOM_NUM2}')
     return INPUT_NUMBER
 
 
-while SHOTS > RANDOM_NUM1 - 1:
-    corr_num_range(RANDOM_NUM1, RANDOM_NUM2)
-    if INPUT_NUMBER != target_number:
-        SHOTS -= 1
-        print(print_shot_of_shots(SHOTS))
-    elif INPUT_NUMBER == target_number:
-        print(print_shot_of_shots(SHOTS))
-        print('\nYes! You win. My congratulations.')
+def game(SHOTS):
+    while SHOTS > RANDOM_NUM1 - 1:
+        INPUT_NUMBER = corr_num_range(RANDOM_NUM1, RANDOM_NUM2)
+        print(INPUT_NUMBER)
+        if INPUT_NUMBER != target_number:
+            SHOTS -= 1
+            print(print_shot_of_shots(SHOTS))
+        elif INPUT_NUMBER == target_number:
+            print(print_shot_of_shots(SHOTS))
+            print('\nYes! You win. My congratulations.')
+            exit(0)
+    else:
+        print('\nNo more attempts')
         exit(0)
-else:
-    print('\nNo more attempts')
-    exit(0)
+    return
 
 
-# no
+game(SHOTS)
