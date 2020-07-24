@@ -29,7 +29,7 @@ def read_this(file):
 
 
 # 2d task:
-import json
+# import json
 
 # with open('questions.json', 'r') as json_file:
 #     data = json.load(json_file)
