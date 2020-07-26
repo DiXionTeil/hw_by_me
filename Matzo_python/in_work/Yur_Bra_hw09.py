@@ -1,9 +1,14 @@
+import random
+
+
 # 1st task:
-import random, time
+import time
 
 limit_shots = 10
 first_value_shots = limit_shots
 ras = {'Player 1': '', 'Player 2': ''}
+
+# ────────── * RULES * ────────────
 
 print(f'''
 Game:
@@ -13,6 +18,8 @@ The player is win, then who has more victory points from {limit_shots} rolls.
 For roll, enter \'\033[1m+\033[0m\'!
 For exit - \'\033[1mexit\033[0m\'
 Start:''')
+
+# ─────────────────────────────────
 
 
 # showing steps of game, need to print()
@@ -75,9 +82,53 @@ def roll_the_dices(shots):
 
 # ────────── * TESTING * ──────────
 
-print(roll_the_dices(limit_shots))
+# print(roll_the_dices(limit_shots))
 
 # ─────────────────────────────────
 
 
 # 2d task:
+num_attempts = 2
+yes_no = input('Хотите сыграть в \'\033[1m\033[35mУгадайку\033[0m\'?[yes/no]\n>')
+
+
+def game_yes_no(yes_no):
+    while not (yes_no == 'yes' or yes_no == 'no'):
+        yes_no = input('...?[yes/no]\n>')
+    if yes_no == 'no':
+        exit(0)
+    elif yes_no == 'yes':
+        random_number = random.randint(1, 1000)
+        for i in range(num_attempts):
+            print(f'У вас {num_attempts - i} попыток!')
+            player_select = input('Введите число:\n>')
+            while not player_select.isdigit():
+                player_select = input('Введите число еще раз:\n>')
+            player_select = int(player_select)
+            if player_select == random_number:
+                print('You win!!!!')
+                qwer(yes_no)
+            elif player_select > random_number:
+                print('Вваше число больше')
+            elif player_select < random_number:
+                print('Вваше число Меньше')
+        else:
+            qwer(yes_no)
+
+
+def qwer(yes_no):
+    yes_no_2 = input('\nХотите прожолжить?[yes/no]\n>')
+    while not (yes_no_2 == 'yes' or yes_no_2 == 'no'):
+        yes_no_2 = input('...?[yes/no]\n>')
+    else:
+        if yes_no_2 == 'no':
+            exit(0)
+        elif yes_no_2 == 'yes':
+            print(game_yes_no(yes_no))
+
+
+# ────────── * TESTING * ──────────
+
+# game_yes_no(yes_no)
+
+# ─────────────────────────────────
