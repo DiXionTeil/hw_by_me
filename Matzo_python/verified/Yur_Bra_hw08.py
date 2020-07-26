@@ -58,15 +58,14 @@ def input_numbers():
     input_number = input('>')
     while not input_number.isdigit():
         input_number = input('Not correct number\nPlease try again!\n>')
-    input_number = int(input_number)
-    return input_number
+    return int(input_number)
 
 
 def corr_num_range(random_num1, random_num2):
     input_number = input_numbers()
     while not random_num1 - 1 < input_number < random_num2 + 1:
         print(f'Not correct number\nIt must to be from {random_num1} to {random_num2}')
-        input_number = input_number()
+        input_number = input_numbers()
     return input_number
 
 
@@ -90,6 +89,7 @@ def game(shots):
 
 
 target_number = random.randint(random_num1, random_num2)
+print(target_number)
 print(f'Let\'s play in game with random number\n'
       + print_shot_of_shots(shots)
       + f'\nTry to guess the number from {random_num1} to {random_num2}')
