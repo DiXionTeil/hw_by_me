@@ -107,16 +107,16 @@ def game_yes_no(yes_no):
             player_select = int(player_select)
             if player_select == random_number:
                 print('You win!!!!')
-                qwer(yes_no)
+                next_question(yes_no)
             elif player_select > random_number:
                 print('Вваше число больше')
             elif player_select < random_number:
                 print('Вваше число Меньше')
         else:
-            qwer(yes_no)
+            next_question(yes_no)
 
 
-def qwer(yes_no):
+def next_question(yes_no):
     yes_no_2 = input('\nХотите прожолжить?[yes/no]\n>')
     while not (yes_no_2 == 'yes' or yes_no_2 == 'no'):
         yes_no_2 = input('...?[yes/no]\n>')
