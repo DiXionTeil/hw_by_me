@@ -129,6 +129,7 @@ def qwer(yes_no):
 
 # ────────── * TESTING * ──────────
 
-# game_yes_no(yes_no)
+# if __name__ == '__main__':
+#     game_yes_no(yes_no)
 
 # ─────────────────────────────────
