@@ -42,10 +42,11 @@ def is_prime(number):
 
 
 # 3d task:
+# можно сделать словарем
 def parse(number, input_str):
     result_list = []
     for i in input_str:
-        if i in 'idso':
+        if i in 'idso':  # необязательно
             if i == 'i':
                 number += 1
             elif i == 'd':
