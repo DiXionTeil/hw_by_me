@@ -54,7 +54,7 @@ def hack_archive(file_name, len_of_str):
 
 # ────────── * TESTING * ──────────
 
-filename = 'hack.zip'
+filename = 'archive.zip'
 hack_archive(filename, 1)
 
 # ─────────────────────────────────
