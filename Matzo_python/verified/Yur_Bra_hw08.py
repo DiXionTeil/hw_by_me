@@ -39,13 +39,13 @@ def numeric_row(file):
     file.write(list_rows)
 
 
-with open('hw_08_(1)', 'r') as main_file, open('test', 'w+') as file_to_write:
+with open('hw_08_(1)', 'r') as main_file, open('hw_08_(2)', 'w+') as file_to_write:
     data = main_file.read()
     file_to_write.write(data)
 
 
 
-with open('test', 'r+') as file_to_write:
+with open('hw_08_(2)', 'r+') as file_to_write:
     numeric_row(file_to_write)
 
 
