@@ -46,7 +46,7 @@ def hack_archive(file_name, len_of_str):
         tries += 1
         print(tries)
         if tries == 10**len_of_str:
-            print('\n\n\n\n─────────────── * WRONG LEN * ───────────────\n\n\n\n')
+            print('\n─────────────── * WRONG LEN * ───────────────\n')
             wrong_passwords.clear()
             len_of_str += 1
             return hack_archive(file_name, len_of_str)
