@@ -29,24 +29,22 @@
 
 
 # то, что истина:
-def numeric_row(file):
-    list_rows = file.readlines()  # вывод строк из текста
-    len = sum(1 for row in list_rows)  # кол-во строк
-    for i in range(len):
-        list_rows.insert(i * 2, f'{i+1}) ')
-    list_rows = ''.join(list_rows)
-    file.seek(0)
-    file.write(list_rows)
+def numeric_row_file(file_name_str):
+    with open(file_name_str, 'r+') as file:
+        list_rows = file.readlines()  # вывод строк из текста в список
+        len = sum(1 for row in list_rows)  # кол-во строк - длина списка
+        for i in range(len):
+            list_rows.insert(i * 2, f'{i+1}) ')
+        list_rows = ''.join(list_rows)
+        file.seek(0)
+        file.write(list_rows)
 
 
 with open('hw_08_(1)', 'r') as main_file, open('hw_08_(2)', 'w+') as file_to_write:
     data = main_file.read()
     file_to_write.write(data)
 
-
-
-with open('hw_08_(2)', 'r+') as file_to_write:
-    numeric_row(file_to_write)
+numeric_row_file('hw_08_(2)')
 
 
 # 2d task:
