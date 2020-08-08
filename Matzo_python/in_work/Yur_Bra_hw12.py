@@ -1,9 +1,10 @@
 import string
 import random
 import zipfile
+import time
 
-# PASSWORD_LENGTH = 4
-
+start_time = time.monotonic()
+time_sec = 60
 
 def extract_archive(file_to_open, password):
     """
@@ -37,6 +38,8 @@ def hack_archive(file_name, len_of_str):
     while True:
         password = imaginary_password(len_of_str)
         if password in wrong_passwords:
+            if (time.monotonic() - start_time) >= time_sec:  # стоп-время (сек) для форсирования
+                exit(0)
             continue
         elif extract_archive(file_to_open, password):
             print(f'Archive {file_name} is hacked. Password - {password}')
