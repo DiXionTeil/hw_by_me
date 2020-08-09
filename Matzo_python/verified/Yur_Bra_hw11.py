@@ -40,6 +40,7 @@ def play_uh(player_coins, pay_cash):
         question = input('[yes/no]\n>')
     else:
         if question == 'no':
+            print(f'You have \033[1m\033[35m{player_coins}\033[0m coins')
             exit(0)
         elif question == 'yes':
             game(enter_coins, player_coins, pay_cash, chance)
@@ -78,7 +79,7 @@ def game(enter_coins, player_coins, pay_cash, chance):
     # ─────────────────────────────
 
     # 2d method: we have n wheels:
-
+    # in developing
     # ─────────────────────────────
 
     player_coins += result
