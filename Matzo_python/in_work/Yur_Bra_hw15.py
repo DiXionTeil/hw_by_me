@@ -24,7 +24,7 @@ class Figures:
 
 
 class Triangle(Figures):
-    def __init__(self, side_1, side_2=0):
+    def __init__(self, side_1, side_2):
         super().__init__(side_1)
         self.side_2 = side_2
 
