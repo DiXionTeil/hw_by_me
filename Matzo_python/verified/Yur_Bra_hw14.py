@@ -13,14 +13,14 @@
 from datetime import date
 import random
 
+
 class Person:
     def __init__(self, year_birth: int, name: str, sername: str):
         self.year_birth = year_birth
         self.age = date.today().year - year_birth
         self.name = name + ' ' + sername
         self.__friends = []
-        print(f'Initialization person \033[1m\033[{random.randint(31,36)}m{self.name}\033[0m')
-
+        print(f'Initialization person \033[1m\033[{random.randint(31, 36)}m{self.name}\033[0m')
 
     def know(self, another_person_object):
         self.__friends.append(another_person_object)
