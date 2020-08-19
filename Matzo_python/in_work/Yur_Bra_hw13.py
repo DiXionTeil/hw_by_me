@@ -111,7 +111,7 @@ def main():
                 dead_line = numeral_verify('Deadline (days):\n>')
             else:
                 dead_line = None
-            todo_list.add_task(Item(done, info, (f'{dead_line} day(-s)') if done == False else ''))
+            todo_list.add_task(Item(done, info, (f'{dead_line} day(-s)' if done == False else '')))
             return f'The {info} added'
 
         elif input_func[0].isdigit() and input_func[1] == 'ok':
