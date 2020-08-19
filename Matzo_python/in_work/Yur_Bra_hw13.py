@@ -4,7 +4,7 @@
 При запуске программы должна появится меню с вариантами действий: добавить в список, вывести весь список, вывести
 список не сделанных дел, отметить как сделаное
 """
-import json
+import json, datetime
 
 
 class Item:
@@ -13,6 +13,7 @@ class Item:
         self.info = info
         self.last_updated = last_updated
 
+    # необходим для записи аргументов
     def as_dict(self):
         return {
             'done': self.done,
@@ -20,18 +21,24 @@ class Item:
             'last_updated': str(self.last_updated),
         }
 
+    def __str__(self):
+        return self.info
+
+    def __repr__(self):
+        return self.info
+
 
 class TodoList:
     def __init__(self, name, owner, dead_line):
         self.name = name
         self.owner = owner
         self.dead_line = dead_line
-        self.file_name = 'tasks.json'
+        # self.file_name = 'tasks.json'
         self.tasks = self.load_tasks()
 
     def load_tasks(self):
         try:
-            with open(self.file_name, 'r') as file:
+            with open(f'{self.name}__#{self.owner}.json', 'r') as file:
                 data = json.load(file)
                 tasks = []
                 for item in data:
@@ -57,9 +64,11 @@ class TodoList:
 
     def done_task(self, index):
         self.tasks[index].done = True
+        self.tasks[index].last_updated = ''
 
-    def undone_task(self, index):
+    def undone_task(self, index, last_updated):
         self.tasks[index].done = False
+        self.tasks[index].last_updated = last_updated
 
     def add_task(self, task):
         self.tasks.append(task)
@@ -68,11 +77,11 @@ class TodoList:
         return self.tasks.index(task)
 
     def to_json(self):
-        with open(self.file_name, 'w') as file:
+        with open(f'{self.name}__#{self.owner}.json', 'w') as file:
             tasks = []
             for task in self.tasks:
                 tasks.append(task.as_dict())
-            json.dump(tasks, file)
+            json.dump(tasks, file, indent=4)
 
 
 def init_todo_list(time=None):
@@ -81,46 +90,78 @@ def init_todo_list(time=None):
     return TodoList(list_name, owner, time)
 
 
-# TODO refactor me))))
 def main():
-    # TODO
+    def numeral_verify(text):
+        input_num = input(text)
+        while not input_num.isdigit():
+            input_num = input('Not correct. Retry:\n>')
+        return int(input_num)
+
     def commands():
         if input_func[0] == 'add' and input_func[1] is not None:
-            return todo_list.add_task(Item(0, todo_list.tasks, None))
-        elif input_func[0] in 'todolist' and input_func[1] == 'ok':
-            return 'good command'
-        elif input_func[0] in 'todolist' and input_func[1] == 'not':
-            return 'good command'
-        elif input_func[0] == 'show':
+            done = input('The task is done or no:\n>')
+            while done not in ['yes', 'no', 'y', 'n', 'Yes', 'No', 'Y', 'N']:
+                done = input('Unknown command. Retry:\n>')
+            if done in ['yes', 'y', 'Yes', 'Y']:
+                done = True
+            else:
+                done = False
+            info = ' '.join(input_func[1:])
+            if done == False:
+                dead_line = numeral_verify('Deadline (days):\n>')
+            else:
+                dead_line = None
+            todo_list.add_task(Item(done, info, f'{dead_line} day(-s)'))
+            return f'The {info} added'
+
+        elif input_func[0].isdigit() and input_func[1] == 'ok':
+            indexed = int(input_func[0])
+            todo_list.done_task(indexed)
+            return 'The task is Done'
+
+        elif input_func[0].isdigit() and input_func[1] == 'not':
+            indexed = int(input_func[0])
+            dead_line = numeral_verify('Deadline (days):\n>')
+            dead_line = f'{dead_line} day(-s)'
+            todo_list.undone_task(indexed, dead_line)
+            return 'The task is Undone'
+
+        elif input_func[0] == 'tasklist':
             return todo_list.tasks_list
+
+        elif input_func[0] == 'undonelist':
+            return todo_list.not_ready_tasks
+
+        elif input_func[0] == 'exit':
+            todo_list.to_json()
+            exit(0)
+
         else:
             return 'Unknown command'
 
     todo_list = init_todo_list()
-    print_opportunities = print('''You can:
+    print('''You can:
     \033[1m\033[31madd\033[30m #task\033[0m - to add new task
-    \033[1m#task \033[32mok\033[0m - to done task
-    \033[1m#task \033[34mnot\033[0m - to undone task
-    \033[1m\033[35mshow\033[0m - to show task-list''')
+    \033[1m#INDEXtask \033[32mok\033[0m - to done task
+    \033[1m#INDEXtask \033[34mnot\033[0m - to undone task
+    \033[1m\033[35mtasklist\033[0m - to show done-list
+    \033[1m\033[35mundonelist\033[0m - to show undone-list
+    \033[1mexit\033[0m - to exit''')
     while True:
         input_func = input('>').split()
         try:
-            print(commands())  # может быть, без print, TODO
+            print(commands())
         except IndexError:
             print('Unknown command')
+            todo_list.to_json()
             continue
-
-    # while True:
-    #     action = input('action какие экшены')
-    #     if action == 'a':
-    #         done = input('1 or 0')
-    #         if done not in {'1', '0'}:
-    #             continue
-    #         done = bool(int(done))
-    #         info = input('Some info')
-    #         todo_list.add_task(Item(done, info, None))
-    #     print(todo_list.tasks)
+        todo_list.to_json()
 
 
 if __name__ == '__main__':
     main()
+    # TODO: есть задумка о том, как вычислять дату для каждой созданной задачи, но ее реализация очень большая можно
+    #  записать при первой записи в json-файл дату его создания, а после исходить от вычисления дат задач и даты
+    #  изменения файла
+    #  datetime = datetime.datetime.now() - datetime.timedelta(days=14)
+    #  print(datetime.strftime('%d-%m-%Y'))
