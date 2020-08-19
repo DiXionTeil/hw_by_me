@@ -42,7 +42,7 @@ class TodoList:
                 data = json.load(file)
                 tasks = []
                 for item in data:
-                    tasks.append(Item(item['done'], item['info'], item['last_updated']))
+                    tasks.append(Item(item.get('done'), item.get('info'), item.get('last_updated')))
                 return tasks
         except FileNotFoundError:
             return []
@@ -140,13 +140,15 @@ def main():
             return 'Unknown command'
 
     todo_list = init_todo_list()
-    print('''You can:
-    \033[1m\033[31madd\033[30m #task\033[0m - to add new task
-    \033[1m#INDEXtask \033[32mok\033[0m - to done task
-    \033[1m#INDEXtask \033[34mnot\033[0m - to undone task
-    \033[1m\033[35mtasklist\033[0m - to show done-list
-    \033[1m\033[35mundonelist\033[0m - to show undone-list
-    \033[1mexit\033[0m - to exit''')
+    print('''╔══════════════════════════════════════╗
+║  You can:                            ║
+║    \033[1m\033[31madd\033[30m #task\033[0m - to add new task       ║
+║    \033[1m#INDEXtask \033[32mok\033[0m - to done task      ║
+║    \033[1m#INDEXtask \033[34mnot\033[0m - to undone task   ║
+║    \033[1m\033[35mtasklist\033[0m - to show done-list      ║
+║    \033[1m\033[35mundonelist\033[0m - to show undone-list  ║
+║    \033[1mexit\033[0m - to exit                    ║
+╚══════════════════════════════════════╝''')
     while True:
         input_func = input('>').split()
         try:
