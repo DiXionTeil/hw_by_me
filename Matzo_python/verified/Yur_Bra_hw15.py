@@ -25,6 +25,7 @@ class Figures:
 
 class Triangle(Figures):
     def __init__(self, side_1, side_2=0):
+        # self._validate_figure(side_1, side_2)
         super().__init__(side_1)
         self.side_2 = side_2
 
@@ -40,6 +41,12 @@ class Triangle(Figures):
             self._side_2 = None
         else:
             raise ValueError
+
+    # def _validate_figure(self, side_1, side_2):
+    #     if side_1 <= 0:
+    #         raise ValueError
+    #     elif side_2 <= 0:
+    #         raise ValueError
 
     def area_rectangular(self):
         return self.side_1 * self.side_2 // 2
@@ -94,7 +101,7 @@ class Rectangle(Figures):
 # ────────── * TESTING * ──────────
 
 # триугольник
-triangle1 = Triangle(5)
+triangle1 = Triangle(5, 3)
 print(triangle1.area_rectangular())
 print(triangle1.area_isosceles())
 print(triangle1.area_equilateral())
