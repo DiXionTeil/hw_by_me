@@ -14,12 +14,13 @@ import random, string
 
 
 class Student:
-    def __init__(self, name: str, age: int, ave_score: float, is_student=True):
+    def __init__(self, name: str, age: int, ave_score: float, is_student=True, group=None):
         self.name = name
         self.age = age
         self.ave_score = ave_score
         self.is_student = is_student or False
         self.personal_index = self._index()
+        self.group_is = group
 
     def _index(self, __index_list=[]):
         while True:
@@ -35,14 +36,23 @@ class Student:
                 return index
 
     def add_to_group(self, Group):
+        self.group_is = Group.name_group
         Group.students.append({self.personal_index: self.name})
 
     def __str__(self):
-        return f'Index:\t\t{self.personal_index}\nStudent:\t{self.name}\n' \
-               f'Age:\t\t{self.age}\n' \
-               f'Ave. score:\t{self.ave_score}\n' \
-               f'Position:\t{"Student" if self.is_student == True else "Not Student"}\n' \
-               f'──────────────────────'
+        if self.group_is is None:
+            return f'Index:\t\t{self.personal_index}\nStudent:\t{self.name}\n' \
+                   f'Age:\t\t{self.age}\n' \
+                   f'Ave. score:\t{self.ave_score}\n' \
+                   f'Position:\t{"Student" if self.is_student == True else "Not Student"}\n' \
+                   f'──────────────────────'
+        else:
+            return f'Index:\t\t{self.personal_index}\nStudent:\t{self.name}\n' \
+                   f'Age:\t\t{self.age}\n' \
+                   f'Ave. score:\t{self.ave_score}\n' \
+                   f'Position:\t{"Student" if self.is_student == True else "Not Student"}\n' \
+                   f'Group:\t\t{self.group_is}\n' \
+                   f'──────────────────────'
 
 
 class Group:
@@ -62,19 +72,23 @@ class Group:
     def __str__(self):
         return f'{self.name_group}:\n{self.students_list}'
 
-
-a1 = Student('Borris', 19, 99.2, True)
-a2 = Student('Barbara', 19, 90, True)
-a3 = Student('Lenny', 20, 75, True)
-a4 = Student('Gregos', 16, 83.5, True)
-g1 = Group()
-a1.add_to_group(g1)
-a2.add_to_group(g1)
-a3.add_to_group(g1)
-a4.add_to_group(g1)
-print(a2)
-print(a3)
-print(a4)
-print(a1)
-print(g1)
+if __name__ == '__main__':
+    a1 = Student('Borris', 19, 99.2, True)
+    a2 = Student('Barbara', 19, 90, True)
+    a3 = Student('Lenny', 20, 75, False)
+    a4 = Student('Gregos', 16, 83.5, True)
+    g1 = Group()
+    print(a2)
+    print(a3)
+    print(a4)
+    print(a1)
+    print(g1)
+    print('')
+    a1.add_to_group(g1)
+    a2.add_to_group(g1)
+    a3.add_to_group(g1)
+    a4.add_to_group(g1)
+    print(a3)
+    print('')
+    print(g1)
 
