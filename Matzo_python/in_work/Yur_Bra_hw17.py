@@ -44,13 +44,13 @@ class Student:
             return f'Index:\t\t{self.personal_index}\nStudent:\t{self.name}\n' \
                    f'Age:\t\t{self.age}\n' \
                    f'Ave. score:\t{self.ave_score}\n' \
-                   f'Position:\t{"Student" if self.is_student == True else "Not Student"}\n' \
+                   f'Status:\t\t{"Student" if self.is_student == True else "Not Student"}\n' \
                    f'──────────────────────'
         else:
             return f'Index:\t\t{self.personal_index}\nStudent:\t{self.name}\n' \
                    f'Age:\t\t{self.age}\n' \
                    f'Ave. score:\t{self.ave_score}\n' \
-                   f'Position:\t{"Student" if self.is_student == True else "Not Student"}\n' \
+                   f'Status:\t\t{"Student" if self.is_student == True else "Not Student"}\n' \
                    f'Group:\t\t{self.group_is}\n' \
                    f'──────────────────────'
 
@@ -72,12 +72,14 @@ class Group:
     def __str__(self):
         return f'{self.name_group}:\n{self.students_list}'
 
+
 if __name__ == '__main__':
     a1 = Student('Borris', 19, 99.2, True)
     a2 = Student('Barbara', 19, 90, True)
     a3 = Student('Lenny', 20, 75, False)
     a4 = Student('Gregos', 16, 83.5, True)
     g1 = Group()
+    g2 = Group()
     print(a2)
     print(a3)
     print(a4)
@@ -91,4 +93,8 @@ if __name__ == '__main__':
     print(a3)
     print('')
     print(g1)
+    print('')
+    a3.add_to_group(g2)
+    print(a3)
+    print(g2)
 
