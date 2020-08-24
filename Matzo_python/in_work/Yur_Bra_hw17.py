@@ -10,9 +10,7 @@
     - студент может покинуть группу
     - перейти в другую
 """
-class Group:
-    def __init__(self):
-        pass
+import random, string
 
 
 class Student:
@@ -36,6 +34,9 @@ class Student:
                 __index_list.append(index)
                 return index
 
+    def add_to_group(self, Group):
+        Group.students.append({self.personal_index: self.name})
+
     def __str__(self):
         return f'Index:\t\t{self.personal_index}\nStudent:\t{self.name}\n' \
                f'Age:\t\t{self.age}\n' \
@@ -43,14 +44,37 @@ class Student:
                f'Position:\t{"Student" if self.is_student == True else "Not Student"}\n' \
                f'──────────────────────'
 
+
+class Group:
+    students = []
+
+    def __init__(self):
+        self.name_group = self._random_literals
+        self.students_list = self.students
+
+    @property
+    def _random_literals(self):
+        name_gr = ''
+        for i in range(3):
+            name_gr += ''.join(random.sample(string.ascii_uppercase, 1))
+        return name_gr
+
+    def __str__(self):
+        return f'{self.name_group}:\n{self.students_list}'
+
+
 a1 = Student('Borris', 19, 99.2, True)
-a2 = Student('Barbarra', 19, 90, True)
+a2 = Student('Barbara', 19, 90, True)
 a3 = Student('Lenny', 20, 75, True)
 a4 = Student('Gregos', 16, 83.5, True)
-
-print(a1)
+g1 = Group()
+a1.add_to_group(g1)
+a2.add_to_group(g1)
+a3.add_to_group(g1)
+a4.add_to_group(g1)
 print(a2)
 print(a3)
 print(a4)
-
+print(a1)
+print(g1)
 
