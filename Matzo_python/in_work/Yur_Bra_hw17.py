@@ -35,9 +35,9 @@ class Student:
                 __index_list.append(index)
                 return index
 
-    def add_to_group(self, Group):
-        self.group_is = Group.name_group
-        Group.students.append({self.personal_index: self.name})
+    def add_to_group(self, group_add):
+        self.group_is = group_add.name_group
+        group_add.students_list.append({self.personal_index: self.name})
 
     def __str__(self):
         if self.group_is is None:
@@ -56,11 +56,9 @@ class Student:
 
 
 class Group:
-    students = []
-
     def __init__(self):
         self.name_group = self._random_literals
-        self.students_list = self.students
+        self.students_list = []
 
     @property
     def _random_literals(self):
@@ -97,4 +95,5 @@ if __name__ == '__main__':
     a3.add_to_group(g2)
     print(a3)
     print(g2)
+    print(g1)
 
