@@ -88,7 +88,8 @@ class Group:
             name_gr += ''.join(random.sample(string.ascii_uppercase, 1))
         return name_gr
 
-    # возвращает средний балл группы
+    # возвращает средний балл группы:
+    #           * необходимо принтить
     def average_score(self):
         if self.students_list:
             counter_of_scores = 0
@@ -97,7 +98,11 @@ class Group:
             return counter_of_scores
 
     def __str__(self):
-        return f'{self.name_group}:\n{self.students_list}'
+        list_new_str = '\n'.join(map(str, self.students_list))  # принтит список элементов с каждой строки
+        if self.students_list:
+            return f'{self.name_group}:\n{list_new_str}'
+        else:
+            return f'{self.name_group}:\nList is None'
 
 
 if __name__ == '__main__':
