@@ -35,22 +35,38 @@ class Student:
                 __index_list.append(index)
                 return index
 
+    # добавляет студента в n-ую группу: "студент может учиться в нескольких группах"
     def add_to_group(self, group_add):
         self.group_is = group_add.name_group
-        group_add.students_list.append({self.personal_index: self.name})
+        self.is_student = True
+        # group_add.students_list.append({self.personal_index: self.name})
+        group_add.students_list.append({self.personal_index: [self.name, self.ave_score]})
+
+    # переносит студента в n-ую группу: "студент намерян перевестись в другую группу"
+    def from_group_to_group(self, group1, group2):
+        for i in group1.students_list:
+            if self.personal_index in i:
+                group1.students_list.remove({self.personal_index: [self.name, self.ave_score]})
+                self.group_is = group2.name_group
+                self.is_student = True
+                group2.students_list.append({self.personal_index: [self.name, self.ave_score]})
+
+    # определяет статус окончания курсов, если студент уже учился:
+    # "студент окончил курсы (группу 'n')"
+    def finished_the_education(self):
+        if all(self.is_student and self.group_is):
+            self.is_student = False
+
 
     def __str__(self):
+        print(f'Index:\t\t{self.personal_index}\nStudent:\t{self.name}\n'
+              f'Age:\t\t{self.age}\n'
+              f'Ave. score:\t{self.ave_score}')
         if self.group_is is None:
-            return f'Index:\t\t{self.personal_index}\nStudent:\t{self.name}\n' \
-                   f'Age:\t\t{self.age}\n' \
-                   f'Ave. score:\t{self.ave_score}\n' \
-                   f'Status:\t\t{"Student" if self.is_student == True else "Not Student"}\n' \
+            return f'Status:\t\t{"Student" if self.is_student == True else "Not Student"}\n'\
                    f'──────────────────────'
         else:
-            return f'Index:\t\t{self.personal_index}\nStudent:\t{self.name}\n' \
-                   f'Age:\t\t{self.age}\n' \
-                   f'Ave. score:\t{self.ave_score}\n' \
-                   f'Status:\t\t{"Student" if self.is_student == True else "Not Student"}\n' \
+            return f'Status:\t\t{"Student" if self.is_student == True else "Finished"}\n'\
                    f'Group:\t\t{self.group_is}\n' \
                    f'──────────────────────'
 
@@ -66,6 +82,14 @@ class Group:
         for i in range(3):
             name_gr += ''.join(random.sample(string.ascii_uppercase, 1))
         return name_gr
+
+    # возвращает средний балл группы
+    def average_score(self):
+        if self.students_list:
+            counter_of_scores = 0
+            for i in self.students_list:
+                counter_of_scores += i.get(''.join(i.keys()))[1]
+            return counter_of_scores
 
     def __str__(self):
         return f'{self.name_group}:\n{self.students_list}'
@@ -83,17 +107,25 @@ if __name__ == '__main__':
     print(a4)
     print(a1)
     print(g1)
-    print('')
+    print(g2)
+    print('\n')
     a1.add_to_group(g1)
     a2.add_to_group(g1)
     a3.add_to_group(g1)
     a4.add_to_group(g1)
     print(a3)
-    print('')
+    print('\n')
     print(g1)
-    print('')
-    a3.add_to_group(g2)
+    print(g2)
+    print('\n')
+    a2.add_to_group(g2)
+    a3.from_group_to_group(g1, g2)
     print(a3)
     print(g2)
     print(g1)
+    print('\n')
+    a1.finished_the_education()
+    print(a1)
+    print(g2)
+    print(g2.average_score())
 
