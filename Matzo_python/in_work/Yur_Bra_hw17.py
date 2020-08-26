@@ -57,16 +57,21 @@ class Student:
         if all(self.is_student and self.group_is):
             self.is_student = False
 
+    # удаляет из группы студента
+    def remove_from_group(self, student_remove):
+        for i in student_remove.students_list:
+            if self.personal_index in i:
+                student_remove.students_list.remove({self.personal_index: [self.name, self.ave_score]})
 
     def __str__(self):
         print(f'Index:\t\t{self.personal_index}\nStudent:\t{self.name}\n'
               f'Age:\t\t{self.age}\n'
               f'Ave. score:\t{self.ave_score}')
         if self.group_is is None:
-            return f'Status:\t\t{"Student" if self.is_student == True else "Not Student"}\n'\
+            return f'Status:\t\t{"Student" if self.is_student is True else "Not Student"}\n' \
                    f'──────────────────────'
         else:
-            return f'Status:\t\t{"Student" if self.is_student == True else "Finished"}\n'\
+            return f'Status:\t\t{"Student" if self.is_student is True else "Finished"}\n' \
                    f'Group:\t\t{self.group_is}\n' \
                    f'──────────────────────'
 
@@ -126,6 +131,8 @@ if __name__ == '__main__':
     print('\n')
     a1.finished_the_education()
     print(a1)
+    a1.remove_from_group(g1)
     print(g2)
     print(g2.average_score())
-
+    print(g1)
+    print(g1.average_score())
