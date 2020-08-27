@@ -18,7 +18,7 @@ class Student:
         self.name = name
         self.age = age
         self.ave_score = ave_score
-        self.is_student = is_student or False
+        self.is_student = is_student
         self.personal_index = self._index()
         self.group_is = group
 
@@ -54,7 +54,7 @@ class Student:
     # определяет статус окончания курсов, если студент уже учился:
     # "студент окончил курсы (группу 'n')"
     def finished_the_education(self):
-        if all(self.is_student and self.group_is):
+        if all([self.is_student, self.group_is]):
             self.is_student = False
 
     # удаляет из группы студента
