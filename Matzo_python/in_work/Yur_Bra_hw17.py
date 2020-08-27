@@ -10,7 +10,9 @@
     - студент может покинуть группу
     - перейти в другую
 """
-import random, string
+import random
+import string
+import uuid
 
 
 class Student:
@@ -19,21 +21,8 @@ class Student:
         self.age = age
         self.ave_score = ave_score
         self.is_student = is_student
-        self.personal_index = self._index()
+        self.personal_index = str(uuid.uuid4())
         self.group_is = group
-
-    def _index(self, __index_list=[]):
-        while True:
-            if not __index_list:
-                index = 0
-            else:
-                index = int(__index_list[-1])
-            index = str(index + 1).rjust(7 if len(str(index)) < 7 else 10, '0')
-            if index in __index_list:
-                continue
-            else:
-                __index_list.append(index)
-                return index
 
     # добавляет студента в n-ую группу: "студент может учиться в нескольких группах"
     def add_to_group(self, group_add):
