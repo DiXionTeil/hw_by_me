@@ -71,7 +71,64 @@ class ATM:
 
 
 # 2nd task:
+"""
+Нужно дописать основную линию сказки. Каждого героя реализовать классом с методами. 
+Так же должен быть класс сказки (или функция), где происходит основное действие с героями
+"""
 
+
+# ___________KOLOBOK_______________
+
+
+class Hero:
+    def __init__(self, name):
+        self.name = name
+
+    def hero_say(self, text):
+        return f'{self.name} say:\n\"{text}\"'
+
+
+class Colobok(Hero):
+    pass
+
+
+class Babka(Hero):
+    def bake_colobok(self):
+        return Colobok('Kolobok')
+
+
+class Ded(Hero):
+    pass
+
+
+class Fox(Hero):
+    pass
+
+
+class Tale:
+    def __init__(self, babka, ded):
+        self.babka = babka
+        self.ded = ded
+        self.colobok = None
+        self.animals = []
+
+    def babkin_dom(self):
+        self.ded.tel_babka_about_colobok()
+        self.colobok = self.babka.bake_colobok()
+
+    def start(self):
+        self.babkin_dom()
+        for animal in self.animals:
+            animal.eatc_colobock()
+            if isinstance(animal, Fox):
+                #  Действия с лисой
+                return
+            self.colobok.rool_out()
+
+
+my_tail = Tale('L', ';')
+
+my_tail.start()
 
 
 
