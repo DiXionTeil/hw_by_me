@@ -78,14 +78,20 @@ class ATM:
 
 
 # ___________KOLOBOK_______________
+import random
+import time
 
 
 class Hero:
     def __init__(self, name):
         self.name = name
 
-    def hero_say(self, text):
+    def hero_say(self, text: str):
         return f'{self.name} say:\n\"{text}\"'
+
+
+class Some_heroes(Hero):
+    pass
 
 
 class Colobok(Hero):
@@ -93,8 +99,8 @@ class Colobok(Hero):
 
 
 class Babka(Hero):
-    def bake_colobok(self):
-        return Colobok('Kolobok')
+    def bake_colobok(self, name_colobok):
+        return Colobok(name_colobok)
 
 
 class Ded(Hero):
@@ -109,24 +115,41 @@ class Tale:
     def __init__(self, babka, ded):
         self.babka = babka
         self.ded = ded
+        self.ded_ok = str(self.ded) + 'ok'
         self.colobok = None
-        self.animals = []
 
-    def babkin_dom(self):
-        self.ded.tel_babka_about_colobok()
-        self.colobok = self.babka.bake_colobok()
+    def babkin_dom1(self):
+        global dedok, babok
+        dedok = Ded(self.ded)
+        babok = Babka(self.babka)
+        print(dedok.hero_say('We need to create a child, bab.'))
+        print(babok.hero_say(f'F**k you, {self.ded_ok}. Let\'s do the sh*t!'))
+        return babok, dedok
+
+    def babkin_dom2(self):
+        global new_life_was_born, babka_and_ded
+        self.colobok = 'Kolobok'
+        new_life_was_born = babok.bake_colobok(self.colobok)
+        print(dedok.hero_say('YES, YEEES!!! Wait, what?...'))
+        time.sleep(2)
+        babka_and_ded = Some_heroes(' and '.join([self.babka, self.ded]))
+        print(babka_and_ded.hero_say('NANI?'))
+        time.sleep(2)
+        print('I...AM...ALIVE!!!')
+        time.sleep(1)
+        print(new_life_was_born.hero_say(f'Hello, my name is {self.colobok}. Nice to meet you.'))
 
     def start(self):
-        self.babkin_dom()
-        for animal in self.animals:
-            animal.eatc_colobock()
-            if isinstance(animal, Fox):
-                #  Действия с лисой
-                return
-            self.colobok.rool_out()
+        self.babkin_dom1()
+        time.sleep(1)
+        print('''
+        Some time late...
+        ''')
+        time.sleep(1)
+        self.babkin_dom2()
 
 
-my_tail = Tale('L', ';')
+my_tail = Tale('Babka', 'Ded')
 
 my_tail.start()
 
