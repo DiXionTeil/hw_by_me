@@ -87,12 +87,22 @@ class Group:
             return counter_of_scores
 
     def __str__(self):
+        # 1st way:
         list_new_str = '\n'.join(map(str, self.students_list))  # принтит список элементов с каждой строки
         if self.students_list:
             return f'{self.name_group}:\n{list_new_str}'
         else:
             return f'{self.name_group}:\nList is None'
-
+        # ─────────────────────────────────
+        # 2nd way:
+        # list = ''
+        # for i in self.students_list:
+        #     key = ''.join(i.keys())
+        #     age = i.get(key)[0]
+        #     score = i.get(key)[1]
+        #     list += f'{key}:\t{age}\t\t{score}\n'
+        # return list
+        # ─────────────────────────────────
 
 if __name__ == '__main__':
     a1 = Student('Borris', 19, 99.2, True)
