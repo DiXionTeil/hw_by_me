@@ -12,7 +12,9 @@ G           30      3       6
 H           20      2       4
 I           10      1       2
 """
-import time, sys, random
+import time
+import sys
+import random
 
 pay_cash = 2
 player_coins = 20
@@ -84,13 +86,13 @@ def game(enter_coins, player_coins, pay_cash, chance):
 
     player_coins += result
     sys.stdout.write(f' {res[0]}')
-    sys.stdout.flush()
+    # sys.stdout.flush()
     time.sleep(.8)
     sys.stdout.write(f' {res[1]}')
-    sys.stdout.flush()
+    # sys.stdout.flush()
     time.sleep(.8)
     sys.stdout.write(f' {res[2]}')
-    sys.stdout.flush()
+    # sys.stdout.flush()
     time.sleep(.8)
     sys.stdout.write('\n')
     # ─────TESTING───────
