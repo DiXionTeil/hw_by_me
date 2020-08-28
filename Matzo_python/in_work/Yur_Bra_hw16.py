@@ -171,6 +171,8 @@ class Tale:
             count_of_win_1pl -= 1
             count_of_win_2pl += 1
             print(foxi.hero_say('Wrong!'))
+        # testing
+        # print(f'{count_of_win_1pl} and {count_of_win_2pl}')
         time.sleep(1)
         sys.stdout.write(foxi.hero_say('I chose number...'))
         time.sleep(2)
@@ -198,15 +200,18 @@ class Tale:
             second_player_status = True
         else:
             second_player_status = False
+        # testing
+        # print(f'{count_of_win_1pl} and {count_of_win_2pl}\n
+        # {first_player_status} and {second_player_status}')
         return [first_player_status, second_player_status]
 
     # 2nd location, scene 3:
     def forest(self, foxi):
         print(foxi.hero_say(f'I\'m {self.fox}. Let\'s play.'))
         game_by_fox = self.game_with_fox(foxi)
-        if game_by_fox[0] is False and game_by_fox[1] is True:
+        if game_by_fox[1] is False and game_by_fox[0] is True:
             print(f'{self.colobok} stay alive')
-        elif game_by_fox[0] is True:
+        elif game_by_fox[1] is True:
             print(f'{self.colobok} is dead')
 
     def start(self):
