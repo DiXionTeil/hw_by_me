@@ -31,11 +31,11 @@
 # то, что истина:
 def numeric_row_file(file_name_str):
     with open(file_name_str, 'r+') as file:
-        list_rows = file.readlines()  # вывод строк из текста в список
+        list_rows = file.readlines()  # вывод строк из текста в список, т.е. из строки делает список
         len = sum(1 for row in list_rows)  # кол-во строк - длина списка
         for i in range(len):
             list_rows.insert(i * 2, f'{i+1}) ')
-        list_rows = ''.join(list_rows)
+        list_rows = ''.join(list_rows)  # образует из списка в строку
         file.seek(0)
         file.write(list_rows)
 
