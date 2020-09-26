@@ -17,33 +17,50 @@
 '''
 
 # условно, это строка, преобразованная из массива:
-# labyrinth_str = '##########\n.........#\n######.###\n#......###\n' \
-#                 '#.####.###\n#........#\n##.#######\n##.##.####\n' \
-#                 '##......##\n#######.##'
+labyrinth_str = '##########\n.........#\n######.###\n#......###\n' \
+                '#.####.###\n#........#\n##.#######\n##.##.####\n' \
+                '##......##\n#######.##'
 
-# labyrinth_str = '..##.\n#..#.\n##..#\n#.#.#\n#.#.#'
+labyrinth_str_2 = '..##.\n#..#.\n##..#\n#.#.#\n#.#.#'
+'''
+. . # # .
+# . . # .
+# # . . #
+# . # . #
+# . # . #
+'''
 
-labyrinth_str = '..#\n#.#\n.#.'
-
-labyrinth_list = labyrinth_str.split('\n')
-labyrinth = []
-for i in labyrinth_list:
-    list_of_lists = []
-    for j in i:
-        list_of_lists.append(j)
-    labyrinth.append(list_of_lists)
-# print(labyrinth)
+labyrinth_str_3 = '..#\n#.#\n.#.'
+'''
+. . #
+# . #
+. # .
+'''
 
 
-def labyrinth_task(labyrinth):
-    for line in range(len(labyrinth)):
-        for column in range(len(labyrinth[line])):
-            if labyrinth[line][column] == '.' and (labyrinth[line][column + 1] == '.' or labyrinth[line + 1][column] == '.'):
-                pass
-            else:
-                print(labyrinth[line][column])
-        break
-    return 0
+def transform_to_list_to_binary(text, symbol_1: str, symbol_2: str):
+    text = text.replace(symbol_1, '1')
+    text = text.replace(symbol_2, '0')
+    text_new = text.split('\n')
+    text_finally = []
+    for i in text_new:
+        text_list = []
+        for j in i:
+            text_list.append(j)
+        text_finally.append(text_list)
+    return text_finally
+
+
+# def labyrinth_task(labyrinth):
+#     for line in range(len(labyrinth)):
+#         for column in range(len(labyrinth[line])):
+#             if labyrinth[line][column] == '.' and (
+#                     labyrinth[line][column + 1] == '.' or labyrinth[line + 1][column] == '.'):
+#                 pass
+#             else:
+#                 print(labyrinth[line][column])
+#         break
+#     return 0
 
 
 # for i in labyrinth_task(labyrinth):
@@ -52,18 +69,11 @@ def labyrinth_task(labyrinth):
 # print(labyrinth_task(labyrinth_str))
 
 
-
-
-
-l=[1, 1, 0, 1]
-l1 = list(0 if l[i] > l[i+1] or l[i] == 0 else 1 for i in range(len(l)-1))
-
-
-labyrinth_str = [[1, 1, 0], [0, 1, 0], [1, 0, 1]]
+labyrinth = transform_to_list_to_binary(labyrinth_str_3, '.', '#')
 
 list_0 = []
-for i in labyrinth_str:
-    list_0.append(list(1 if i[j] == 1 and i[j+1] == 1 else 0 for j in range(len(i)-1)))
+for i in labyrinth:
+    list_0.append(list(1 if i[j] == '1' and i[j + 1] == '1' else 0 for j in range(len(i)-1)))
 
 for i in list_0:
     print(i)
