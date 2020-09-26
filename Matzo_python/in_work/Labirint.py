@@ -38,9 +38,7 @@ labyrinth_str_3 = '..#\n#.#\n.#.'
 '''
 
 
-def transform_to_list_to_binary(text, symbol_1: str, symbol_2: str):
-    text = text.replace(symbol_1, '1')
-    text = text.replace(symbol_2, '0')
+def transform_to_list(text):
     text_new = text.split('\n')
     text_finally = []
     for i in text_new:
@@ -68,12 +66,24 @@ def transform_to_list_to_binary(text, symbol_1: str, symbol_2: str):
 
 # print(labyrinth_task(labyrinth_str))
 
+labyrinth = transform_to_list(labyrinth_str_3)
+# print(labyrinth)
 
-labyrinth = transform_to_list_to_binary(labyrinth_str_3, '.', '#')
+# list_0 = []
+# for i in labyrinth:
+#     list_0.append(list(1 if i[j] == '1' and i[j + 1] == '1' else 0 for j in range(len(i)-1)))
+#
+# for i in list_0:
+#     print(i)
+
 
 list_0 = []
-for i in labyrinth:
-    list_0.append(list(1 if i[j] == '1' and i[j + 1] == '1' else 0 for j in range(len(i)-1)))
-
-for i in list_0:
-    print(i)
+for line in labyrinth:
+    list_1 = []
+    for column in range(len(line) - 1):
+        if line[column] == '.' and line[column + 1] == '.':
+            list_1.append('.')
+        else:
+            list_1.append('#')
+    list_0.append(list_1)
+print(list_0)
