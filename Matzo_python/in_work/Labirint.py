@@ -117,5 +117,6 @@ def game(labyrinth_str):
     return f'Точка входа: {enter_points_1}\nТочка выхода: {enter_points_2}'
 
 
-print(game(labyrinth_str))
+if __name__ == "__main__":
+    print(game(labyrinth_str))
 

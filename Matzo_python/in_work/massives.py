@@ -43,7 +43,8 @@ def massive_min_max(min_val: int, n: int):
 
 def array_element(array: str, line_i: int, column_j: int):
     array_1step = array.split('\n')
-    array_1step.pop(-1)
+    if array_1step[-1] == '':
+        array_1step.pop(-1)
     array_2step = []
     for i in array_1step:
         ij = i.split('\t')
