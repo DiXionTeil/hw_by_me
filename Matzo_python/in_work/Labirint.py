@@ -103,15 +103,15 @@ def game(labyrinth_str):
     for i in labyrinth_true[-1]:
         if '.' in labyrinth_true[-1]:
             if not enter_points_1:
-                enter_points_1.append(len(labyrinth_true))  # строка
+                enter_points_1.append(len(labyrinth_true) - 1)  # строка
                 enter_points_1.append(labyrinth_true[-1].index('.'))  # столбец
             elif enter_points_1 and not enter_points_2:
-                enter_points_2.append(len(labyrinth_true))  # строка
+                enter_points_2.append(len(labyrinth_true) - 1)  # строка
                 enter_points_2.append(labyrinth_true[-1].index('.'))  # столбец
         if labyrinth_true[-1].count('.') > 1 and not enter_points_2:
             labyrinth_true[-1].reverse()
             if '.' in labyrinth_true[-1]:
-                enter_points_2.append(len(labyrinth_true))  # строка
+                enter_points_2.append(len(labyrinth_true) - 1)  # строка
                 enter_points_2.append(labyrinth_true[-1].index('.'))  # столбец
             labyrinth_true[-1].reverse()
     return f'Точка входа: {enter_points_1}\nТочка выхода: {enter_points_2}'
